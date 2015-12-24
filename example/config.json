@@ -1,0 +1,4 @@
+{
+	"triggerBranch": "testing",
+	"script": "./script.sh"
+}
