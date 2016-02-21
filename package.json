@@ -1,6 +1,6 @@
 {
   "name": "deploy-me",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Tiny application to act as a hook for github webhooks",
   "main": "index.js",
   "bin": "index.js",

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var argv = require('minimist')(process.argv.slice(1));
+var argv = require('minimist')(process.argv.slice(2));
 var fs = require('fs');
 var join = require('path').join;
 
@@ -13,8 +13,7 @@ Parameters: \n\
   -h --help - get usage and parameters info \n\
   -p --port [portnum] - specify port on which server will run");
 } else {
-  var path = join(__dirname, argv._[0]);
-  fs.readFile(path, function(err, data) {
+  fs.readFile(argv._[0], function(err, data) {
     if(err) throw err;
     var config = JSON.parse(data);
     server(argv.p || argv.port, handler(config));
