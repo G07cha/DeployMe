@@ -1,0 +1,33 @@
+{
+  "name": "deploy-me",
+  "version": "0.1.0",
+  "description": "Tiny application to act as a hook for github webhooks",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/G07cha/DeployMe.git"
+  },
+  "keywords": [
+    "github",
+    "autodeploy",
+    "deploy",
+    "webhook"
+  ],
+  "author": "g07cha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/G07cha/DeployMe/issues"
+  },
+  "homepage": "https://github.com/G07cha/DeployMe#readme",
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0"
+  }
+}

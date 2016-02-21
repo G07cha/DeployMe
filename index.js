@@ -1,36 +1,20 @@
-var http = require('http');
+var argv = require('minimist')(process.argv.slice(2));
 var fs = require('fs');
-var sys = require('sys')
-var exec = require('child_process').exec;
+var join = require('path').join;
 
-// Handler for bash output
-function puts(error, stdout, stderr) {
-    if(error) throw error;
-    if(stderr) console.log(stderr);
-    console.log(stdout) 
+var server = require('./lib/server');
+var handler = require('./lib/handler');
+
+if(argv.help || argv.h) {
+  console.log("Usage:\n deploy-me ./config.json \n\n\
+Parameters: \n\
+  -h --help - get usage and parameters info \n\
+  -p --port [portnum] - specify port on which server will run");
+} else {
+  var path = join(__dirname, argv._[0]);
+  fs.readFile(path, function(err, data) {
+    if(err) throw err;
+    var config = JSON.parse(data);
+    server(argv.p || argv.port, handler(config));
+  });
 }
-
-var config = JSON.parse(fs.readFileSync(process.argv[3] || './config.json', 'utf8'));
-const PORT = config.port || 8000;
-
-function handleRequest(req, res) {
-    var data = '';
-    req.on('data', function(chunk) {
-	data += chunk;
-    });
-
-    req.on('end', function() {
-	data = JSON.parse(data);
-	if(data.ref === 'refs/heads/' + config.triggerBranch) {
-	   exec('/bin/sh ' + config.script, puts);
-	}
-    });
-
-    res.end('Ohai! Path:', req.url);
-}
-
-var server = http.createServer(handleRequest);
-
-server.listen(PORT, function() {
-    console.log("Server listening :" + PORT);
-});
