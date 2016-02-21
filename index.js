@@ -1,4 +1,4 @@
-var argv = require('minimist')(process.argv.slice(2));
+var argv = require('minimist')(process.argv.slice(1));
 var fs = require('fs');
 var join = require('path').join;
 
